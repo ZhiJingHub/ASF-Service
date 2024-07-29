@@ -1,0 +1,19 @@
+[Unit]
+Description=ASF Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+WorkingDirectory=/asf
+ExecStart=/asf/ArchiSteamFarm
+User=root
+Group=root
+ExecStop=/asf/ArchiSteamFarm --shutdown
+Environment=ASFPATH=/asf
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
