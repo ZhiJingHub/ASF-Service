@@ -22,7 +22,7 @@ check_root() {
 download_file() {
     local url=$1
     local output=$2
-    echo -e "\033[34m正在从 $url 下载文件到 $output ...\033[0m"
+    echo -e "\n\033[34m正在从 $url 下载文件到 $output ...\033[0m"
 
     # 记录开始时间
     start_time=$(date +%s)
@@ -36,7 +36,7 @@ download_file() {
 
     # 计算下载时间
     download_time=$((end_time - start_time))
-    echo -e "\033[32m文件已成功下载，实际下载时间为 ${download_time} 秒。\033[0m"
+    echo -e "\033[32m文件已成功下载，实际下载时间为 ${download_time} 秒。\033[0m\n"
 }
 
 # Function to download service file
@@ -49,53 +49,56 @@ download_service() {
 # Function to enable service
 enable_service() {
     # 启用asf服务
+    echo -e "\n\033[34m正在启用asf服务...\033[0m"
     systemctl enable asf
     if [ $? -eq 0 ]; then
-        echo -e "\033[32mService 已成功启用。\033[0m"
+        echo -e "\033[32mService 已成功启用。\033[0m\n"
     else
-        echo -e "\033[31m启用服务失败。\033[0m"
+        echo -e "\033[31m启用服务失败。\033[0m\n"
     fi
 }
 
 # Function to stop service
 stop_service() {
     # 停止asf服务
+    echo -e "\n\033[34m正在停止asf服务...\033[0m"
     systemctl stop asf
     if [ $? -eq 0 ]; then
-        echo -e "\033[32mService 已成功停止。\033[0m"
+        echo -e "\033[32mService 已成功停止。\033[0m\n"
     else
-        echo -e "\033[31m停止服务失败。\033[0m"
+        echo -e "\033[31m停止服务失败。\033[0m\n"
     fi
 }
 
 # Function to restart service
 restart_service() {
     # 重启asf服务
+    echo -e "\n\033[34m正在重启asf服务...\033[0m"
     systemctl restart asf
     if [ $? -eq 0 ]; then
-        echo -e "\033[32mService 已成功重启。\033[0m"
+        echo -e "\033[32mService 已成功重启。\033[0m\n"
     else
-        echo -e "\033[31m重启服务失败。\033[0m"
+        echo -e "\033[31m重启服务失败。\033[0m\n"
     fi
 }
 
 # Function to check service status
 check_service_status() {
     # 检查asf服务的状态
-    echo -e "\033[34m正在检查服务状态...\033[0m"
+    echo -e "\n\033[34m正在检查服务状态...\033[0m"
     systemctl status asf
 }
 
 # Function to update the script
 update_script() {
     check_root
-    echo -e "\033[34m正在从 $UPDATE_URL 下载更新的脚本...\033[0m"
+    echo -e "\n\033[34m正在从 $UPDATE_URL 下载更新的脚本...\033[0m"
     # 下载新的脚本文件
     download_file "$UPDATE_URL" "/root/asf.sh"
 
     echo -e "\033[32m脚本已成功更新。\033[0m"
     chmod +x /root/asf.sh
-    echo -e "\033[32m正在重新启动脚本...\033[0m"
+    echo -e "\033[32m正在重新启动脚本...\033[0m\n"
     # 重新执行下载的新脚本
     exec /root/asf.sh
 }
@@ -152,7 +155,7 @@ main_menu() {
                 exit 0
                 ;;
             *)
-                echo -e "\033[31m无效选择，请输入0到6之间的数字。\033[0m"
+                echo -e "\033[31m无效选择，请输入0到6之间的数字。\033[0m\n"
                 ;;
         esac
 
